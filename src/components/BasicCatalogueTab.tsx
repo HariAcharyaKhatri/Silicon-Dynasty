@@ -1,6 +1,7 @@
 import React from 'react';
 import { ComponentItem, CustomPartNaming, InventoryItem, TierId } from '../types/game';
 import { Package, Plus, DollarSign, Tag, TrendingUp, AlertTriangle, ShieldCheck, Eye, Layers } from 'lucide-react';
+import Images from '../assets/images';
 
 interface Props {
   catalogue: ComponentItem[];
@@ -174,16 +175,16 @@ export const BasicCatalogueTab: React.FC<Props> = ({
           <img 
             src={
               selectedComp.tier === 'T0'
-                ? '/images/garage_origin.svg'
+                ? Images.garageOrigin
                 : selectedComp.tier === 'T1' || selectedComp.tier === 'T2'
-                ? '/images/motherboard_pcb.svg'
+                ? Images.motherboardPcb
                 : selectedComp.tier === 'T3' || selectedComp.tier === 'T4'
-                ? '/images/cpu_die.svg'
+                ? Images.cpuDie
                 : selectedComp.tier === 'T5'
-                ? '/images/fab_silicon.svg'
+                ? Images.fabSilicon
                 : selectedComp.tier === 'T6'
-                ? '/images/supercomputer_cluster.svg'
-                : '/images/quantum_chamber.svg'
+                ? Images.supercomputerCluster
+                : Images.quantumChamber
             }
             alt="Production Facility Visual" 
             className="w-full h-36 object-cover group-hover:scale-[1.02] transition-transform duration-500"

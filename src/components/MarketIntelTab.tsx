@@ -1,6 +1,7 @@
 import React from 'react';
 import { MarketSegment, Competitor, CompanyState } from '../types/game';
 import { Users, BarChart3, TrendingUp, DollarSign, Award, Target } from 'lucide-react';
+import Images from '../assets/images';
 
 interface Props {
   segments: MarketSegment[];
@@ -182,7 +183,7 @@ export const MarketIntelTab: React.FC<Props> = ({
           <div className="bg-[#0d1117] border border-[#30363d] rounded-xl overflow-hidden flex flex-col justify-between">
             <div className="relative h-24 overflow-hidden border-b border-[#30363d]">
               <img 
-                src="/images/mainframe_1952.svg" 
+                src={Images.mainframe1952} 
                 alt="1952 Mainframe Commercial Market" 
                 className="w-full h-full object-cover"
               />

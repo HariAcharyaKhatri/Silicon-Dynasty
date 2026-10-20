@@ -3,6 +3,7 @@ import { AppLogo } from './AppLogo';
 import { AuthUser } from './AuthScreen';
 import { AboutModal } from './AboutModal';
 import { DeveloperModal } from './DeveloperModal';
+import Images from '../assets/images';
 import {
   Play,
   RotateCcw,
@@ -242,7 +243,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
             {/* Visual Era Showcase Graphic */}
             <div className="rounded-xl overflow-hidden border border-[#30363d] bg-black/50 relative group">
               <img 
-                src="/images/garage_origin.svg" 
+                src={Images.garageOrigin} 
                 alt="1952 Garage Workshop" 
                 className="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-700"
               />
@@ -300,19 +301,19 @@ export const MainMenu: React.FC<MainMenuProps> = ({
               </div>
               <div className="grid grid-cols-4 gap-2">
                 <div className="relative rounded border border-emerald-500/50 overflow-hidden bg-black/60 group">
-                  <img src="/images/garage_origin.svg" alt="T0 Garage" className="w-full h-12 object-cover" />
+                  <img src={Images.garageOrigin} alt="T0 Garage" className="w-full h-12 object-cover" />
                   <span className="absolute bottom-0 inset-x-0 bg-black/80 text-[8px] font-mono text-center text-emerald-400 font-bold">T0 GARAGE</span>
                 </div>
                 <div className="relative rounded border border-[#30363d] overflow-hidden bg-black/60 group opacity-85 hover:opacity-100 transition-opacity">
-                  <img src="/images/fab_silicon.svg" alt="T3 Fab" className="w-full h-12 object-cover" />
+                  <img src={Images.fabSilicon} alt="T3 Fab" className="w-full h-12 object-cover" />
                   <span className="absolute bottom-0 inset-x-0 bg-black/80 text-[8px] font-mono text-center text-teal-400 font-bold">T3 FAB</span>
                 </div>
                 <div className="relative rounded border border-[#30363d] overflow-hidden bg-black/60 group opacity-85 hover:opacity-100 transition-opacity">
-                  <img src="/images/supercomputer_cluster.svg" alt="T5 HPC" className="w-full h-12 object-cover" />
+                  <img src={Images.supercomputerCluster} alt="T5 HPC" className="w-full h-12 object-cover" />
                   <span className="absolute bottom-0 inset-x-0 bg-black/80 text-[8px] font-mono text-center text-blue-400 font-bold">T5 CLUSTER</span>
                 </div>
                 <div className="relative rounded border border-[#30363d] overflow-hidden bg-black/60 group opacity-85 hover:opacity-100 transition-opacity">
-                  <img src="/images/quantum_chamber.svg" alt="T7 Quantum" className="w-full h-12 object-cover" />
+                  <img src={Images.quantumChamber} alt="T7 Quantum" className="w-full h-12 object-cover" />
                   <span className="absolute bottom-0 inset-x-0 bg-black/80 text-[8px] font-mono text-center text-purple-400 font-bold">T7 QUANTUM</span>
                 </div>
               </div>

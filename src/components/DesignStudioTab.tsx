@@ -2,6 +2,7 @@ import React from 'react';
 import { ComponentItem, Blueprint, TierId } from '../types/game';
 import { validatePcBlueprint } from '../utils/compatibilityEngine';
 import { Layers, CheckCircle2, AlertTriangle, XCircle, Zap, Shield, Save, Lock, ArrowRight } from 'lucide-react';
+import Images from '../assets/images';
 
 interface Props {
   catalogue: ComponentItem[];
@@ -62,7 +63,7 @@ export const DesignStudioTab: React.FC<Props> = ({
         {/* Humble Garage Visual */}
         <div className="rounded-xl overflow-hidden border border-[#30363d] bg-black/60 relative">
           <img 
-            src="/images/garage_origin.svg" 
+            src={Images.garageOrigin} 
             alt="1952 Garage Origin Workshop" 
             className="w-full h-36 object-cover"
           />
@@ -325,7 +326,7 @@ export const DesignStudioTab: React.FC<Props> = ({
         {/* Architectural Motherboard PCB Graphic */}
         <div className="rounded-2xl overflow-hidden border border-[#30363d] bg-black/60 relative group shadow-lg">
           <img 
-            src="/images/motherboard_pcb.svg" 
+            src={Images.motherboardPcb} 
             alt="Motherboard Circuit Blueprint" 
             className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-500"
           />

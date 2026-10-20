@@ -1,6 +1,7 @@
 import React from 'react';
 import { TechNode, Employee, TierId } from '../types/game';
 import { Lightbulb, CheckCircle2, Play, Users, Clock, ArrowRight } from 'lucide-react';
+import Images from '../assets/images';
 
 interface Props {
   techTree: TechNode[];
@@ -191,7 +192,7 @@ export const ResearchLabTab: React.FC<Props> = ({
           {/* Silicon Cleanroom R&D Visual Banner */}
           <div className="rounded-xl overflow-hidden border border-[#30363d] bg-black/60 relative group shadow-lg">
             <img 
-              src="/images/fab_silicon.svg" 
+              src={Images.fabSilicon} 
               alt="Silicon Photolithography Cleanroom" 
               className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-500"
             />

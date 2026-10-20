@@ -2,6 +2,7 @@ import React from 'react';
 import { ComponentItem, SuperContract, Blueprint } from '../types/game';
 import { validateSupercomputerBlueprint } from '../utils/compatibilityEngine';
 import { Server, Zap, Shield, FileCheck, CheckCircle2, AlertTriangle, XCircle, Award } from 'lucide-react';
+import Images from '../assets/images';
 
 interface Props {
   catalogue: ComponentItem[];
@@ -210,7 +211,7 @@ export const SupercomputerTab: React.FC<Props> = ({
           {/* Supercomputer Cluster Visual Image */}
           <div className="rounded-xl overflow-hidden border border-[#30363d] bg-black/60 relative group shadow-lg">
             <img 
-              src="/images/supercomputer_cluster.svg" 
+              src={Images.supercomputerCluster} 
               alt="HPC Supercomputer Cluster" 
               className="w-full h-36 object-cover group-hover:scale-105 transition-transform duration-500"
             />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { CompanyState, TierId } from '../types/game';
 import { Cpu, DollarSign, Award, Wrench, Shield, CheckCircle2 } from 'lucide-react';
+import Images from '../assets/images';
 
 interface Props {
   onComplete: (setup: {
@@ -61,7 +62,7 @@ export const CompanyWizardModal: React.FC<Props> = ({ onComplete }) => {
               {/* Garage Workshop Visual Image */}
               <div className="rounded-xl overflow-hidden border border-emerald-500/30 bg-black/50 relative">
                 <img 
-                  src="/images/garage_origin.svg" 
+                  src={Images.garageOrigin} 
                   alt="1952 Garage Origin Workshop" 
                   className="w-full h-32 object-cover"
                 />

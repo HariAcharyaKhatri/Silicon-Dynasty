@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppLogo } from './AppLogo';
 import { Shield, Sparkles, User, ArrowRight, CheckCircle2, Lock, Cpu, Globe } from 'lucide-react';
+import Images from '../assets/images';
 
 export interface AuthUser {
   id: string;
@@ -86,7 +87,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onLoginSuccess }) => {
           {/* Hero Banner Visual Graphic */}
           <div className="w-full rounded-xl overflow-hidden border border-emerald-500/20 shadow-inner bg-black/40 relative">
             <img 
-              src="/images/hero_dynasty.svg" 
+              src={Images.heroDynasty} 
               alt="Silicon Dynasty Hero" 
               className="w-full h-36 object-cover hover:scale-105 transition-transform duration-700"
             />

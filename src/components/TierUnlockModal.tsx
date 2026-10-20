@@ -2,6 +2,7 @@ import React from 'react';
 import { TierId } from '../types/game';
 import { Sparkles, CheckCircle2, ArrowRight, Eye, Layers, Wrench } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import Images from '../assets/images';
 
 interface TierUnlockModalProps {
   unlockedTier: TierId;
@@ -103,16 +104,16 @@ export const TierUnlockModal: React.FC<TierUnlockModalProps> = ({
             <img 
               src={
                 unlockedTier === 'T7' 
-                  ? '/images/quantum_chamber.svg'
+                  ? Images.quantumChamber
                   : unlockedTier === 'T6'
-                  ? '/images/supercomputer_cluster.svg'
+                  ? Images.supercomputerCluster
                   : unlockedTier === 'T5'
-                  ? '/images/fab_silicon.svg'
+                  ? Images.fabSilicon
                   : unlockedTier === 'T4'
-                  ? '/images/cpu_die.svg'
+                  ? Images.cpuDie
                   : unlockedTier === 'T2'
-                  ? '/images/motherboard_pcb.svg'
-                  : '/images/mainframe_1952.svg'
+                  ? Images.motherboardPcb
+                  : Images.mainframe1952
               } 
               alt="Tier Architectural Blueprint"
               className="w-full h-36 object-cover" 
