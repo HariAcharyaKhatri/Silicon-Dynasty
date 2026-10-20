@@ -45,8 +45,8 @@ export const DeveloperModal: React.FC<DeveloperModalProps> = ({ isOpen, onClose 
               <span>Core Conceptualization & Inspiration</span>
             </div>
             <blockquote className="text-sm font-semibold text-white leading-relaxed font-mono bg-[#09110d] p-3.5 rounded-lg border border-emerald-500/30">
-            "Original concept and creative direction by Hari Khatri, developed with AI-assisted tools and Antigravity. Inspired by the vision of building a computer technology company from the ground up."
-              </blockquote>
+              "Prompt engineered and conceptualized by Hari Khatri (with foundations by antigravity). Gameplay mechanics and UI heavily inspired by Car Company Tycoon."
+            </blockquote>
           </div>
 
         {/* Gameplay & UI Details */}
