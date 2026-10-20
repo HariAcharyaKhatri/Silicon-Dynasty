@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <radialGradient id="tubeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fdba74" stop-opacity="1"/>
+      <stop offset="50%" stop-color="#ea580c" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#7c2d12" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tapeMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#cbd5e1"/>
+      <stop offset="50%" stop-color="#64748b"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Room -->
+  <rect width="400" height="300" fill="#090d16" rx="12"/>
+  
+  <!-- 1952 Mainframe Steel Cabinet Unit 1 (Tape Drive) -->
+  <rect x="30" y="30" width="150" height="230" rx="4" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <rect x="40" y="40" width="130" height="130" rx="3" fill="#0f172a" stroke="#334155"/>
+  
+  <!-- Reel-to-Reel Tape Left -->
+  <circle cx="75" cy="105" r="28" fill="#1e293b" stroke="url(#tapeMetal)" stroke-width="4"/>
+  <circle cx="75" cy="105" r="14" fill="#020617"/>
+  <circle cx="75" cy="105" r="6" fill="#f8fafc"/>
+  <path d="M 60 90 L 90 120 M 60 120 L 90 90" stroke="#64748b" stroke-width="2"/>
+  
+  <!-- Reel-to-Reel Tape Right -->
+  <circle cx="135" cy="105" r="28" fill="#1e293b" stroke="url(#tapeMetal)" stroke-width="4"/>
+  <circle cx="135" cy="105" r="14" fill="#020617"/>
+  <circle cx="135" cy="105" r="6" fill="#f8fafc"/>
+  <path d="M 120 90 L 150 120 M 120 120 L 150 90" stroke="#64748b" stroke-width="2"/>
+  
+  <!-- Tape Path Guides -->
+  <path d="M 75 133 L 105 155 L 135 133" fill="none" stroke="#ca8a04" stroke-width="3"/>
+
+  <!-- Tape Control Console -->
+  <rect x="40" y="180" width="130" height="65" fill="#111827" rx="2"/>
+  <!-- Toggle Switches -->
+  <g fill="#94a3b8">
+    <rect x="50" y="195" width="4" height="12"/>
+    <rect x="65" y="195" width="4" height="12"/>
+    <rect x="80" y="190" width="4" height="17"/>
+    <rect x="95" y="195" width="4" height="12"/>
+    <rect x="110" y="190" width="4" height="17"/>
+    <rect x="125" y="195" width="4" height="12"/>
+    <rect x="140" y="195" width="4" height="12"/>
+    <rect x="155" y="190" width="4" height="17"/>
+  </g>
+  <!-- Indicator Lights -->
+  <circle cx="52" cy="225" r="3.5" fill="#ef4444"/>
+  <circle cx="68" cy="225" r="3.5" fill="#22c55e"/>
+  <circle cx="84" cy="225" r="3.5" fill="#eab308"/>
+  <circle cx="100" cy="225" r="3.5" fill="#3b82f6"/>
+  <circle cx="116" cy="225" r="3.5" fill="#22c55e"/>
+  <circle cx="132" cy="225" r="3.5" fill="#ef4444"/>
+
+  <!-- Mainframe Logic & Vacuum Tube Bay Unit 2 -->
+  <rect x="200" y="30" width="170" height="230" rx="4" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  
+  <!-- Vacuum Tube Grate Behind Glass -->
+  <rect x="210" y="40" width="150" height="130" rx="3" fill="#050811" stroke="#334155"/>
+  
+  <!-- Glowing Triode / Pentode Vacuum Tubes -->
+  <!-- Row 1 -->
+  <g>
+    <rect x="220" y="55" width="16" height="28" rx="7" fill="#78350f" stroke="#fed7aa" stroke-width="1"/>
+    <circle cx="228" cy="69" r="10" fill="url(#tubeGlow)"/>
+    <rect x="245" y="55" width="16" height="28" rx="7" fill="#78350f" stroke="#fed7aa" stroke-width="1"/>
+    <circle cx="253" cy="69" r="10" fill="url(#tubeGlow)"/>
+    <rect x="270" y="55" width="16" height="28" rx="7" fill="#78350f" stroke="#fed7aa" stroke-width="1"/>
+    <circle cx="278" cy="69" r="10" fill="url(#tubeGlow)"/>
+    <rect x="295" y="55" width="16" height="28" rx="7" fill="#78350f" stroke="#fed7aa" stroke-width="1"/>
+    <circle cx="303" cy="69" r="10" fill="url(#tubeGlow)"/>
+    <rect x="320" y="55" width="16" height="28" rx="7" fill="#78350f" stroke="#fed7aa" stroke-width="1"/>
+    <circle cx="328" cy="69" r="10" fill="url(#tubeGlow)"/>
+  </g>
+  <!-- Row 2 -->
+  <g>
+    <rect x="220" y="95" width="16" height="28" rx="7" fill="#78350f" stroke="#fed7aa" stroke-width="1"/>
+    <circle cx="228" cy="109" r="10" fill="url(#tubeGlow)"/>
+    <rect x="245" y="95" width="16" height="28" rx="7" fill="#78350f" stroke="#fed7aa" stroke-width="1"/>
+    <circle cx="253" cy="109" r="10" fill="url(#tubeGlow)"/>
+    <rect x="270" y="95" width="16" height="28" rx="7" fill="#78350f" stroke="#fed7aa" stroke-width="1"/>
+    <circle cx="278" cy="109" r="10" fill="url(#tubeGlow)"/>
+    <rect x="295" y="95" width="16" height="28" rx="7" fill="#78350f" stroke="#fed7aa" stroke-width="1"/>
+    <circle cx="303" cy="109" r="10" fill="url(#tubeGlow)"/>
+    <rect x="320" y="95" width="16" height="28" rx="7" fill="#78350f" stroke="#fed7aa" stroke-width="1"/>
+    <circle cx="328" cy="109" r="10" fill="url(#tubeGlow)"/>
+  </g>
+  <!-- Tube Sockets -->
+  <rect x="215" y="130" width="140" height="6" fill="#334155"/>
+  <rect x="215" y="145" width="140" height="15" fill="#1e293b"/>
+  <text x="235" y="156" fill="#64748b" font-size="8" font-family="monospace">OCTAL SOCKET ACCUMULATOR</text>
+
+  <!-- Patch Panel with Patch Cables -->
+  <rect x="210" y="180" width="150" height="65" fill="#0f172a" rx="2"/>
+  <circle cx="225" cy="195" r="3" fill="#334155"/>
+  <circle cx="245" cy="195" r="3" fill="#334155"/>
+  <circle cx="265" cy="195" r="3" fill="#334155"/>
+  <circle cx="285" cy="195" r="3" fill="#334155"/>
+  <circle cx="305" cy="195" r="3" fill="#334155"/>
+  <circle cx="325" cy="195" r="3" fill="#334155"/>
+  <circle cx="345" cy="195" r="3" fill="#334155"/>
+  
+  <circle cx="225" cy="225" r="3" fill="#334155"/>
+  <circle cx="245" cy="225" r="3" fill="#334155"/>
+  <circle cx="265" cy="225" r="3" fill="#334155"/>
+  <circle cx="285" cy="225" r="3" fill="#334155"/>
+  <circle cx="305" cy="225" r="3" fill="#334155"/>
+  <circle cx="325" cy="225" r="3" fill="#334155"/>
+  <circle cx="345" cy="225" r="3" fill="#334155"/>
+
+  <!-- Patch cables -->
+  <path d="M 225 195 Q 235 220 285 225" fill="none" stroke="#ef4444" stroke-width="2.5"/>
+  <path d="M 265 195 Q 290 205 325 225" fill="none" stroke="#eab308" stroke-width="2.5"/>
+  <path d="M 305 195 Q 275 210 245 225" fill="none" stroke="#3b82f6" stroke-width="2.5"/>
+
+  <!-- Heavy floor conduit -->
+  <rect x="20" y="260" width="360" height="8" rx="2" fill="#0f172a" stroke="#334155"/>
+  <text x="25" y="288" fill="#64748b" font-family="monospace" font-size="10">ERA 1952 • VACUUM LOGIC MAINFRAME ARCHITECTURE</text>
+  <text x="320" y="288" fill="#f97316" font-family="monospace" font-size="10">5.00 kHz</text>
+</svg>

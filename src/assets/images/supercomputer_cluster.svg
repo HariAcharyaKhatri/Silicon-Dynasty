@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="datacenterBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="#030712" />
+      <stop offset="50%" stopColor="#0b1120" />
+      <stop offset="100%" stopColor="#02040a" />
+    </linearGradient>
+    <linearGradient id="chilledPipes" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stopColor="#06b6d4" />
+      <stop offset="50%" stopColor="#22d3ee" />
+      <stop offset="100%" stopColor="#0891b2" />
+    </linearGradient>
+    <filter id="neonPulse">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <rect width="600" height="400" fill="url(#datacenterBg)" />
+
+  <!-- Raised Datacenter Floor Grate Tiles -->
+  <g opacity="0.2" stroke="#22d3ee" stroke-width="1">
+    <line x1="0" y1="310" x2="600" y2="310" />
+    <line x1="0" y1="340" x2="600" y2="340" />
+    <line x1="0" y1="370" x2="600" y2="370" />
+    <line x1="100" y1="400" x2="220" y2="280" />
+    <line x1="200" y1="400" x2="280" y2="280" />
+    <line x1="300" y1="400" x2="340" y2="280" />
+    <line x1="400" y1="400" x2="400" y2="280" />
+    <line x1="500" y1="400" x2="460" y2="280" />
+  </g>
+
+  <!-- Overhead Cryogenic/Fluorinert Chilled Liquid Cooling Manifold -->
+  <rect x="0" y="20" width="600" height="24" fill="url(#chilledPipes)" stroke="#0891b2" stroke-width="2" />
+  <line x1="110" y1="44" x2="110" y2="90" stroke="#06b6d4" stroke-width="8" stroke-linecap="round" />
+  <line x1="230" y1="44" x2="230" y2="90" stroke="#06b6d4" stroke-width="8" stroke-linecap="round" />
+  <line x1="370" y1="44" x2="370" y2="90" stroke="#06b6d4" stroke-width="8" stroke-linecap="round" />
+  <line x1="490" y1="44" x2="490" y2="90" stroke="#06b6d4" stroke-width="8" stroke-linecap="round" />
+
+  <!-- Server Rack 1 (Left Blade Cabinet) -->
+  <g transform="translate(60, 90)">
+    <rect width="100" height="200" rx="8" fill="#111827" stroke="#1f2937" stroke-width="3" />
+    <!-- 8 Individual Server Blades -->
+    <rect x="8" y="10" width="84" height="18" rx="3" fill="#1f2937" stroke="#374151" />
+    <circle cx="18" cy="19" r="3" fill="#10b981" filter="url(#neonPulse)" />
+    <rect x="8" y="34" width="84" height="18" rx="3" fill="#1f2937" stroke="#374151" />
+    <circle cx="18" cy="43" r="3" fill="#10b981" />
+    <rect x="8" y="58" width="84" height="18" rx="3" fill="#1f2937" stroke="#374151" />
+    <circle cx="18" cy="67" r="3" fill="#38bdf8" filter="url(#neonPulse)" />
+    <rect x="8" y="82" width="84" height="18" rx="3" fill="#1f2937" stroke="#374151" />
+    <circle cx="18" cy="91" r="3" fill="#10b981" />
+    <rect x="8" y="106" width="84" height="18" rx="3" fill="#1f2937" stroke="#374151" />
+    <circle cx="18" cy="115" r="3" fill="#10b981" />
+    <rect x="8" y="130" width="84" height="18" rx="3" fill="#1f2937" stroke="#374151" />
+    <circle cx="18" cy="139" r="3" fill="#f59e0b" />
+    <rect x="8" y="154" width="84" height="18" rx="3" fill="#1f2937" stroke="#374151" />
+    <circle cx="18" cy="163" r="3" fill="#10b981" />
+    <rect x="8" y="178" width="84" height="14" rx="2" fill="#0f172a" />
+  </g>
+
+  <!-- Server Rack 2 (Mainframe Center 1) -->
+  <g transform="translate(180, 80)">
+    <rect width="110" height="210" rx="8" fill="#0f172a" stroke="#22d3ee" stroke-width="2.5" />
+    <rect x="10" y="10" width="90" height="180" rx="4" fill="#020617" />
+    <!-- High-Density Compute Matrix -->
+    <g fill="#0284c7" opacity="0.8">
+      <circle cx="25" cy="30" r="2.5" /> <circle cx="45" cy="30" r="2.5" /> <circle cx="65" cy="30" r="2.5" /> <circle cx="85" cy="30" r="2.5" />
+      <circle cx="25" cy="50" r="2.5" /> <circle cx="45" cy="50" r="2.5" /> <circle cx="65" cy="50" r="2.5" /> <circle cx="85" cy="50" r="2.5" />
+      <circle cx="25" cy="70" r="2.5" /> <circle cx="45" cy="70" r="2.5" /> <circle cx="65" cy="70" r="2.5" /> <circle cx="85" cy="70" r="2.5" />
+      <circle cx="25" cy="90" r="2.5" /> <circle cx="45" cy="90" r="2.5" /> <circle cx="65" cy="90" r="2.5" /> <circle cx="85" cy="90" r="2.5" />
+      <circle cx="25" cy="110" r="2.5" /> <circle cx="45" cy="110" r="2.5" /> <circle cx="65" cy="110" r="2.5" /> <circle cx="85" cy="110" r="2.5" />
+      <circle cx="25" cy="130" r="2.5" /> <circle cx="45" cy="130" r="2.5" /> <circle cx="65" cy="130" r="2.5" /> <circle cx="85" cy="130" r="2.5" />
+      <circle cx="25" cy="150" r="2.5" /> <circle cx="45" cy="150" r="2.5" /> <circle cx="65" cy="150" r="2.5" /> <circle cx="85" cy="150" r="2.5" />
+    </g>
+    <line x1="20" y1="175" x2="90" y2="175" stroke="#10b981" stroke-width="3" filter="url(#neonPulse)" />
+  </g>
+
+  <!-- Server Rack 3 (Mainframe Center 2) -->
+  <g transform="translate(310, 80)">
+    <rect width="110" height="210" rx="8" fill="#0f172a" stroke="#22d3ee" stroke-width="2.5" />
+    <rect x="10" y="10" width="90" height="180" rx="4" fill="#020617" />
+    <g fill="#10b981" opacity="0.8">
+      <circle cx="25" cy="30" r="2.5" /> <circle cx="45" cy="30" r="2.5" /> <circle cx="65" cy="30" r="2.5" /> <circle cx="85" cy="30" r="2.5" />
+      <circle cx="25" cy="50" r="2.5" /> <circle cx="45" cy="50" r="2.5" /> <circle cx="65" cy="50" r="2.5" /> <circle cx="85" cy="50" r="2.5" />
+      <circle cx="25" cy="70" r="2.5" /> <circle cx="45" cy="70" r="2.5" /> <circle cx="65" cy="70" r="2.5" /> <circle cx="85" cy="70" r="2.5" />
+      <circle cx="25" cy="90" r="2.5" /> <circle cx="45" cy="90" r="2.5" /> <circle cx="65" cy="90" r="2.5" /> <circle cx="85" cy="90" r="2.5" />
+      <circle cx="25" cy="110" r="2.5" /> <circle cx="45" cy="110" r="2.5" /> <circle cx="65" cy="110" r="2.5" /> <circle cx="85" cy="110" r="2.5" />
+    </g>
+    <line x1="20" y1="175" x2="90" y2="175" stroke="#38bdf8" stroke-width="3" filter="url(#neonPulse)" />
+  </g>
+
+  <!-- Server Rack 4 (Right Power & Transformer Unit) -->
+  <g transform="translate(440, 90)">
+    <rect width="100" height="200" rx="8" fill="#111827" stroke="#1f2937" stroke-width="3" />
+    <rect x="10" y="15" width="80" height="80" rx="4" fill="#1f2937" />
+    <!-- High Voltage Warning Symbol -->
+    <polygon points="50,25 35,55 48,55 42,75 65,45 52,45" fill="#facc15" />
+    <text x="50" y="125" text-anchor="middle" font-family="'Courier New', monospace" font-size="11" fill="#94a3b8">
+      3000W 3-PHASE
+    </text>
+    <rect x="15" y="145" width="70" height="35" rx="3" fill="#0f172a" stroke="#334155" />
+    <text x="50" y="167" text-anchor="middle" font-family="'Courier New', monospace" font-size="12" fill="#22d3ee" font-weight="bold">
+      415V RMS
+    </text>
+  </g>
+
+  <!-- Title Badge -->
+  <rect x="20" y="350" width="280" height="32" rx="6" fill="#0f172a" stroke="#22d3ee" stroke-width="1.5" />
+  <text x="30" y="371" font-family="'Courier New', monospace" font-size="12" fill="#22d3ee" font-weight="bold">
+    FACILITY: SUPERCOMPUTER CLUSTER
+  </text>
+</svg>

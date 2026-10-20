@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="cleanroomBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="#081426" />
+      <stop offset="50%" stopColor="#0f213d" />
+      <stop offset="100%" stopColor="#07111f" />
+    </linearGradient>
+    <linearGradient id="stepperGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stopColor="#0284c7" />
+      <stop offset="100%" stopColor="#0369a1" />
+    </linearGradient>
+    <linearGradient id="waferRainbow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stopColor="#38bdf8" />
+      <stop offset="25%" stopColor="#818cf8" />
+      <stop offset="50%" stopColor="#c084fc" />
+      <stop offset="75%" stopColor="#fb7185" />
+      <stop offset="100%" stopColor="#34d399" />
+    </linearGradient>
+    <filter id="laserGlow">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <rect width="600" height="400" fill="url(#cleanroomBg)" />
+
+  <!-- Cleanroom Air Recirculation Ceiling Filters -->
+  <g stroke="#1e3a5f" stroke-width="1.5" opacity="0.6">
+    <rect x="40" y="10" width="100" height="30" fill="#0c1d36" />
+    <rect x="160" y="10" width="100" height="30" fill="#0c1d36" />
+    <rect x="280" y="10" width="100" height="30" fill="#0c1d36" />
+    <rect x="400" y="10" width="100" height="30" fill="#0c1d36" />
+    <rect x="520" y="10" width="60" height="30" fill="#0c1d36" />
+  </g>
+
+  <!-- Photolithography Stepper Machine Centerpiece -->
+  <g transform="translate(300, 210)">
+    <!-- Base Chamber -->
+    <rect x="-180" y="-80" width="360" height="200" rx="16" fill="#1e293b" stroke="#38bdf8" stroke-width="2.5" />
+    <rect x="-160" y="-60" width="320" height="160" rx="10" fill="#0b1320" stroke="#0ea5e9" stroke-width="1.5" />
+
+    <!-- Sealed Robotic Wafer Stage Chamber with Circular Viewport -->
+    <circle cx="0" cy="20" r="65" fill="#020617" stroke="#38bdf8" stroke-width="3" />
+    <circle cx="0" cy="20" r="58" fill="url(#waferRainbow)" opacity="0.85" />
+    
+    <!-- Silicon Wafer Pattern Grid -->
+    <g opacity="0.45" stroke="#ffffff" stroke-width="0.75">
+      <line x1="-40" y1="20" x2="40" y2="20" />
+      <line x1="-35" y1="0" x2="35" y2="0" />
+      <line x1="-35" y1="40" x2="35" y2="40" />
+      <line x1="0" y1="-20" x2="0" y2="60" />
+      <line x1="-20" y1="-15" x2="-20" y2="55" />
+      <line x1="20" y1="-15" x2="20" y2="55" />
+    </g>
+
+    <!-- Laser Etching Reticle Beam Focused Down -->
+    <polygon points="0,-75 -15,10 15,10" fill="#38bdf8" opacity="0.3" />
+    <line x1="0" y1="-75" x2="0" y2="20" stroke="#38bdf8" stroke-width="3" filter="url(#laserGlow)" />
+    <circle cx="0" cy="20" r="4" fill="#ffffff" filter="url(#laserGlow)" />
+
+    <!-- Upper Optics Column Housing -->
+    <path d="M-60 -80 L-40 -150 L40 -150 L60 -80 Z" fill="#334155" stroke="#64748b" stroke-width="2" />
+    <rect x="-30" y="-170" width="60" height="20" rx="4" fill="#0284c7" />
+
+    <!-- Diagnostic Panels on Flanks -->
+    <rect x="-150" y="-40" width="45" height="120" rx="6" fill="#111c2e" stroke="#1e3a5f" />
+    <line x1="-140" y1="-20" x2="-115" y2="-20" stroke="#38bdf8" stroke-width="2" />
+    <line x1="-140" y1="-5" x2="-120" y2="-5" stroke="#34d399" stroke-width="2" />
+    <line x1="-140" y1="10" x2="-115" y2="10" stroke="#f59e0b" stroke-width="2" />
+
+    <rect x="105" y="-40" width="45" height="120" rx="6" fill="#111c2e" stroke="#1e3a5f" />
+    <circle cx="127" cy="-20" r="6" fill="#10b981" filter="url(#laserGlow)" />
+    <circle cx="127" cy="0" r="6" fill="#0284c7" />
+    <circle cx="127" cy="20" r="6" fill="#e2e8f0" />
+  </g>
+
+  <!-- Cleanroom Technician in Bunny Suit (Silhouette Outline on Right) -->
+  <g transform="translate(530, 240)">
+    <circle cx="0" cy="-40" r="16" fill="#f8fafc" stroke="#38bdf8" stroke-width="2" />
+    <rect x="-10" y="-44" width="20" height="8" rx="2" fill="#0284c7" />
+    <path d="M-22 -20 Q 0 -26 22 -20 L28 80 L-28 80 Z" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2" />
+  </g>
+
+  <!-- Title Badge -->
+  <rect x="20" y="350" width="260" height="32" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-width="1.5" />
+  <text x="30" y="371" font-family="'Courier New', monospace" font-size="12" fill="#38bdf8" font-weight="bold">
+    FACILITY: SUB-MICRON SILICON FAB
+  </text>
+</svg>

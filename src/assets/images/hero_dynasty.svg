@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stopColor="#080c14" />
+      <stop offset="50%" stopColor="#0d1522" />
+      <stop offset="100%" stopColor="#05080f" />
+    </linearGradient>
+    <linearGradient id="screenGlow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stopColor="#064e3b" />
+      <stop offset="50%" stopColor="#022c22" />
+      <stop offset="100%" stopColor="#01140e" />
+    </linearGradient>
+    <linearGradient id="chartLine" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stopColor="#10b981" />
+      <stop offset="50%" stopColor="#34d399" />
+      <stop offset="100%" stopColor="#6ee7b7" />
+    </linearGradient>
+    <linearGradient id="goldDynasty" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stopColor="#fbbf24" />
+      <stop offset="50%" stopColor="#f59e0b" />
+      <stop offset="100%" stopColor="#d97706" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#bgGrad)" />
+
+  <!-- Isometric Cyber Grid Floor -->
+  <g opacity="0.18" stroke="#10b981" stroke-width="1">
+    <path d="M0 380 L800 380 M0 410 L800 410 M0 440 L800 440 M0 470 L800 470" />
+    <path d="M100 500 L250 350 M250 500 L350 350 M400 500 L450 350 M550 500 L550 350 M700 500 L650 350" />
+  </g>
+
+  <!-- Silicon Wafer / Tech Core Disk on Left -->
+  <g transform="translate(180, 240)">
+    <ellipse cx="0" cy="0" rx="140" ry="60" fill="#042f2e" stroke="#10b981" stroke-width="2" />
+    <ellipse cx="0" cy="0" rx="110" ry="46" fill="#0f172a" stroke="#059669" stroke-width="1.5" />
+    <ellipse cx="0" cy="0" rx="80" ry="32" fill="#021c16" stroke="#34d399" stroke-width="1" />
+    <!-- Die Grid -->
+    <path d="M-60 0 L60 0 M-40 -15 L40 -15 M-40 15 L40 15 M-20 -25 L20 -25 M-20 25 L20 25" stroke="#10b981" stroke-width="1" opacity="0.6" />
+    <path d="M0 -30 L0 30 M-30 -25 L-30 25 M30 -25 L30 25 M-50 -15 L-50 15 M50 -15 L50 15" stroke="#10b981" stroke-width="1" opacity="0.6" />
+    <!-- Central Qubit Core -->
+    <circle cx="0" cy="0" r="12" fill="#10b981" filter="url(#glow)" />
+    <circle cx="0" cy="0" r="6" fill="#ecfdf5" />
+  </g>
+
+  <!-- Iconic Retro Terminal Housing on Right -->
+  <g transform="translate(560, 220)">
+    <!-- Mainframe Terminal Bezel -->
+    <rect x="-140" y="-120" width="280" height="220" rx="20" fill="#1e293b" stroke="#475569" stroke-width="4" />
+    <rect x="-120" y="-100" width="240" height="170" rx="12" fill="url(#screenGlow)" stroke="#059669" stroke-width="2" />
+    <!-- Terminal Stand -->
+    <path d="M-50 100 L-70 140 L70 140 L50 100 Z" fill="#334155" stroke="#475569" stroke-width="2" />
+    
+    <!-- Stock Growth Curve on Screen -->
+    <path d="M-100 40 Q -50 20 -20 10 T 30 -30 T 90 -70" fill="none" stroke="url(#chartLine)" stroke-width="5" filter="url(#glow)" />
+    <circle cx="90" cy="-70" r="8" fill="#34d399" filter="url(#glow)" />
+    <circle cx="90" cy="-70" r="4" fill="#ffffff" />
+    
+    <!-- Scanlines -->
+    <line x1="-120" y1="-70" x2="120" y2="-70" stroke="#10b981" stroke-width="1" opacity="0.15" />
+    <line x1="-120" y1="-40" x2="120" y2="-40" stroke="#10b981" stroke-width="1" opacity="0.15" />
+    <line x1="-120" y1="-10" x2="120" y2="-10" stroke="#10b981" stroke-width="1" opacity="0.15" />
+    <line x1="-120" y1="20" x2="120" y2="20" stroke="#10b981" stroke-width="1" opacity="0.15" />
+    <line x1="-120" y1="50" x2="120" y2="50" stroke="#10b981" stroke-width="1" opacity="0.15" />
+
+    <!-- Terminal LEDs -->
+    <circle cx="80" cy="85" r="4" fill="#10b981" filter="url(#glow)" />
+    <circle cx="95" cy="85" r="4" fill="#f59e0b" />
+    <circle cx="110" cy="85" r="4" fill="#64748b" />
+  </g>
+
+  <!-- Glowing Connecting Circuit Trace -->
+  <path d="M180 240 Q 360 300 440 220 T 560 220" fill="none" stroke="#10b981" stroke-width="2.5" stroke-dasharray="8 6" opacity="0.7" />
+
+  <!-- Banner Typography -->
+  <g transform="translate(400, 80)" text-anchor="middle">
+    <text font-family="'Courier New', monospace" font-size="14" fill="#10b981" letter-spacing="6" font-weight="bold">
+      THE EVOLUTION OF COMPUTING (1952–2035)
+    </text>
+    <text font-family="system-ui, -apple-system, sans-serif" font-size="44" fill="#ffffff" font-weight="900" letter-spacing="3" y="45">
+      SILICON <tspan fill="url(#goldDynasty)">DYNASTY</tspan>
+    </text>
+  </g>
+</svg>

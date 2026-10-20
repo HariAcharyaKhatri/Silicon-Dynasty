@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="100%" height="100%">
+  <defs>
+    <radialGradient id="dieCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9"/>
+      <stop offset="40%" stop-color="#0284c7" stop-opacity="0.6"/>
+      <stop offset="85%" stop-color="#0369a1" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0f172a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="goldContact" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#eab308"/>
+      <stop offset="100%" stop-color="#ca8a04"/>
+    </linearGradient>
+    <pattern id="microgrid" width="12" height="12" patternUnits="userSpaceOnUse">
+      <path d="M 12 0 L 0 0 0 12" fill="none" stroke="#1e293b" stroke-width="0.7"/>
+    </pattern>
+  </defs>
+
+  <!-- Background substrate -->
+  <rect width="400" height="300" fill="#0b0f19" rx="12"/>
+  <rect width="400" height="300" fill="url(#microgrid)" rx="12" opacity="0.6"/>
+
+  <!-- Package substrate (Dark green-black high density organic packaging) -->
+  <rect x="50" y="30" width="300" height="240" rx="8" fill="#042f2e" stroke="#0d9488" stroke-width="2"/>
+  
+  <!-- Outer gold pin contacts -->
+  <g fill="url(#goldContact)">
+    <!-- Top contacts -->
+    <rect x="70" y="36" width="12" height="6" rx="1"/>
+    <rect x="95" y="36" width="12" height="6" rx="1"/>
+    <rect x="120" y="36" width="12" height="6" rx="1"/>
+    <rect x="145" y="36" width="12" height="6" rx="1"/>
+    <rect x="245" y="36" width="12" height="6" rx="1"/>
+    <rect x="270" y="36" width="12" height="6" rx="1"/>
+    <rect x="295" y="36" width="12" height="6" rx="1"/>
+    <rect x="320" y="36" width="12" height="6" rx="1"/>
+    <!-- Bottom contacts -->
+    <rect x="70" y="258" width="12" height="6" rx="1"/>
+    <rect x="95" y="258" width="12" height="6" rx="1"/>
+    <rect x="120" y="258" width="12" height="6" rx="1"/>
+    <rect x="145" y="258" width="12" height="6" rx="1"/>
+    <rect x="245" y="258" width="12" height="6" rx="1"/>
+    <rect x="270" y="258" width="12" height="6" rx="1"/>
+    <rect x="295" y="258" width="12" height="6" rx="1"/>
+    <rect x="320" y="258" width="12" height="6" rx="1"/>
+    <!-- Left contacts -->
+    <rect x="56" y="55" width="6" height="12" rx="1"/>
+    <rect x="56" y="80" width="6" height="12" rx="1"/>
+    <rect x="56" y="105" width="6" height="12" rx="1"/>
+    <rect x="56" y="180" width="6" height="12" rx="1"/>
+    <rect x="56" y="205" width="6" height="12" rx="1"/>
+    <rect x="56" y="230" width="6" height="12" rx="1"/>
+    <!-- Right contacts -->
+    <rect x="338" y="55" width="6" height="12" rx="1"/>
+    <rect x="338" y="80" width="6" height="12" rx="1"/>
+    <rect x="338" y="105" width="6" height="12" rx="1"/>
+    <rect x="338" y="180" width="6" height="12" rx="1"/>
+    <rect x="338" y="205" width="6" height="12" rx="1"/>
+    <rect x="338" y="230" width="6" height="12" rx="1"/>
+  </g>
+
+  <!-- Silicon Die Carrier -->
+  <rect x="100" y="65" width="200" height="170" rx="4" fill="#020617" stroke="#38bdf8" stroke-width="1.5"/>
+  <rect x="100" y="65" width="200" height="170" fill="url(#dieCore)"/>
+
+  <!-- Trace lines to die -->
+  <g stroke="#14b8a6" stroke-width="1.2" opacity="0.6">
+    <path d="M 82 42 L 82 80 L 100 80"/>
+    <path d="M 107 42 L 107 70 L 115 70 L 115 65"/>
+    <path d="M 290 42 L 290 65"/>
+    <path d="M 315 42 L 315 80 L 300 80"/>
+    <path d="M 62 110 L 85 110 L 85 130 L 100 130"/>
+    <path d="M 338 110 L 315 110 L 315 130 L 300 130"/>
+    <path d="M 82 258 L 82 220 L 100 220"/>
+    <path d="M 315 258 L 315 220 L 300 220"/>
+  </g>
+
+  <!-- Die Internal Execution Cores / L3 Cache Blocks -->
+  <g stroke="#38bdf8" stroke-width="0.8" fill="#0f172a">
+    <!-- Core 0 -->
+    <rect x="115" y="80" width="38" height="40" rx="2"/>
+    <text x="123" y="104" fill="#38bdf8" font-size="9" font-family="monospace">CORE 0</text>
+    <!-- Core 1 -->
+    <rect x="160" y="80" width="38" height="40" rx="2"/>
+    <text x="168" y="104" fill="#38bdf8" font-size="9" font-family="monospace">CORE 1</text>
+    <!-- Core 2 -->
+    <rect x="205" y="80" width="38" height="40" rx="2"/>
+    <text x="213" y="104" fill="#38bdf8" font-size="9" font-family="monospace">CORE 2</text>
+    <!-- Core 3 -->
+    <rect x="250" y="80" width="38" height="40" rx="2"/>
+    <text x="258" y="104" fill="#38bdf8" font-size="9" font-family="monospace">CORE 3</text>
+
+    <!-- Shared L3 Cache Strip -->
+    <rect x="115" y="130" width="173" height="32" rx="2" fill="#1e1b4b" stroke="#818cf8"/>
+    <text x="168" y="150" fill="#a5b4fc" font-size="10" font-family="monospace" font-weight="bold">L3 CACHE (64MB)</text>
+
+    <!-- GPU Compute Units / Neural Engine -->
+    <rect x="115" y="172" width="83" height="45" rx="2" fill="#14532d" stroke="#4ade80"/>
+    <text x="127" y="198" fill="#86efac" font-size="9" font-family="monospace">VECTOR ENGINE</text>
+
+    <!-- Memory Controller & I/O -->
+    <rect x="205" y="172" width="83" height="45" rx="2" fill="#451a03" stroke="#f59e0b"/>
+    <text x="222" y="198" fill="#fcd34d" font-size="9" font-family="monospace">DDR5 IMC</text>
+  </g>
+
+  <!-- Spec Text Overlay -->
+  <text x="20" y="290" fill="#64748b" font-family="monospace" font-size="10">SILICON DYNASTY • CUSTOM SILICON DIE ARCHITECTURE</text>
+  <text x="315" y="290" fill="#38bdf8" font-family="monospace" font-size="10">3nm GAAFET</text>
+</svg>
