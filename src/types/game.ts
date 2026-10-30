@@ -35,12 +35,46 @@ export interface ComponentItem {
   isUnlockedDefault?: boolean;
 }
 
+export interface CriticReview {
+  publication: string;
+  reviewer: string;
+  score: number; // 1.0 to 10.0
+  verdict: string;
+  comment: string;
+  highlight: 'positive' | 'neutral' | 'critical';
+}
+
+export interface ProductReviewSummary {
+  overallScore: number; // 1.0 to 10.0
+  performanceScore: number; // 1 to 10
+  reliabilityScore: number; // 1 to 10
+  valueScore: number; // 1 to 10
+  badge: 'Exceptional' | 'Editor\'s Choice' | 'Strong Contender' | 'Average' | 'Overpriced' | 'Unreliable';
+  salesMultiplier: number; // e.g. 1.4 for +40% sales, 0.7 for -30%
+  date: string;
+  reviews: CriticReview[];
+}
+
+export type AdTierLevel = 'tier_0_organic' | 'tier_1_local' | 'tier_2_magazine' | 'tier_3_broadcast' | 'tier_4_blitz';
+
+export interface AdOption {
+  id: AdTierLevel;
+  name: string;
+  costMonthly: number;
+  appealBoostPct: number;
+  description: string;
+}
+
 export interface CustomPartNaming {
   customName: string;
   componentId: string;
   unitsSold: number;
+  recentSalesRate?: number; // daily sell velocity
   reputation: number; // 0 - 100
   pricePremiumPct: number;
+  sellingPrice?: number;
+  adSpend?: number; // per-product monthly ad budget
+  review?: ProductReviewSummary;
 }
 
 export interface InventoryItem {
@@ -77,7 +111,11 @@ export interface Blueprint {
   appealScore: number;
   releaseDate?: string;
   unitsSold: number;
+  recentSalesRate?: number;
+  inventoryCount?: number;
   activeProduction: boolean;
+  adSpend?: number; // per-product monthly ad budget
+  review?: ProductReviewSummary;
 }
 
 export interface SuperContract {

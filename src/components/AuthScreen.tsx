@@ -108,7 +108,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onLoginSuccess }) => {
             </p>
             <div className="flex items-center justify-center gap-2 pt-1 text-[11px] text-emerald-400/90 font-mono">
               <Cpu className="w-3.5 h-3.5" />
-              <span>Deep Tycoon Simulation (Inspired by Car Company Tycoon)</span>
+              <span>Deep Tech Tycoon Simulation</span>
             </div>
           </div>
 

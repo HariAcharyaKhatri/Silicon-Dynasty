@@ -21,13 +21,16 @@ import {
   Competitor,
   SuperContract,
   TierId,
+  ProductReviewSummary,
 } from './types/game';
 import { calculateCompanyValuation } from './utils/valuationEngine';
+import { generateProductReview } from './utils/reviewEngine';
 import { AppLogo } from './components/AppLogo';
 import { AuthScreen, AuthUser } from './components/AuthScreen';
 import { MainMenu } from './components/MainMenu';
 import { CompanyWizardModal } from './components/CompanyWizardModal';
 import { TierUnlockModal } from './components/TierUnlockModal';
+import { LaunchReviewModal } from './components/LaunchReviewModal';
 import { NewsTicker } from './components/NewsTicker';
 import { BasicCatalogueTab } from './components/BasicCatalogueTab';
 import { ResearchLabTab } from './components/ResearchLabTab';
@@ -68,6 +71,13 @@ export function App() {
 
   // Celebratory Tier Unlock Modal State
   const [celebrationTier, setCelebrationTier] = React.useState<TierId | null>(null);
+
+  // Press Embargo / Critic Review Modal State
+  const [launchReviewTarget, setLaunchReviewTarget] = React.useState<{
+    name: string;
+    type: 'pc' | 'component' | 'supercomputer';
+    review: ProductReviewSummary;
+  } | null>(null);
 
   // Time Engine: 1952 start
   const [gameDate, setGameDate] = React.useState<GameDate>({ year: 1952, month: 3, day: 1 });
@@ -164,14 +174,30 @@ export function App() {
     // Reset date to March 1, 1952
     setGameDate({ year: 1952, month: 3, day: 1 });
 
-    // Register initial custom named part
+    // Register initial custom named part with initial critic review
+    const initialComp = INITIAL_COMPONENTS.find((c) => c.id === 't0_power_cable');
+    const initialReview = generateProductReview({
+      name: setup.initialPartName,
+      type: 'component',
+      tier: 'T0',
+      totalCost: initialComp?.cost || 4,
+      sellingPrice: initialComp?.basePrice || 12,
+      reliability: initialComp?.reliability || 0.95,
+      appealScore: 72,
+      currentYear: 1952,
+    });
+
     setCustomParts({
       t0_power_cable: {
         customName: setup.initialPartName,
         componentId: 't0_power_cable',
         unitsSold: 0,
+        recentSalesRate: 1,
         reputation: 50,
         pricePremiumPct: 0,
+        sellingPrice: initialComp?.basePrice || 12,
+        adSpend: 0,
+        review: initialReview,
       },
     });
 
@@ -218,7 +244,7 @@ export function App() {
     return () => clearInterval(timer);
   }, [isPlaying, gameSpeed, appScreen, employees, techTree, inventory, company]);
 
-  // Daily Tick handler
+  // Daily Tick handler: Advance research & calculate live daily product sales
   const handleDailyTick = () => {
     // 1. Advance Research Points (HW-RP)
     setTechTree((prevNodes) =>
@@ -247,6 +273,127 @@ export function App() {
         return { ...node, progressRP: newRP };
       })
     );
+
+    // 2. Daily Sales & Market Velocity for Branded Components
+    let dailyComponentRevenue = 0;
+    setInventory((prevInv) => {
+      let invChanged = false;
+      const updatedInv = { ...prevInv };
+
+      Object.keys(updatedInv).forEach((compId) => {
+        const item = updatedInv[compId];
+        if (item && item.quantity > 0) {
+          const comp = catalogue.find((c) => c.id === compId);
+          if (comp) {
+            const partInfo = customParts[compId];
+            const price = partInfo?.sellingPrice || comp.basePrice;
+            const cost = comp.cost;
+
+            // Price elasticity factor
+            const markup = price / Math.max(1, cost);
+            let elasticity = 1.0;
+            if (markup <= 1.5) elasticity = 1.4;
+            else if (markup <= 2.5) elasticity = 1.1;
+            else if (markup <= 3.5) elasticity = 0.85;
+            else if (markup <= 5.0) elasticity = 0.5;
+            else elasticity = 0.25;
+
+            // Ad boost (from individual item ad spend or company ad)
+            const itemAdSpend = partInfo?.adSpend || 0;
+            const companyAdBonus = 1 + ((company.monthlyAdSpend || 0) / 5000) * 0.15;
+            const itemAdBonus = 1 + (itemAdSpend / 300) * 0.45;
+            const reviewMult = partInfo?.review?.salesMultiplier || 1.0;
+            const outsiderBonus = company.background === 'bg_outsider' ? 1.15 : 1.0;
+
+            const baseDaily = Math.max(1, Math.round(1 + Math.random() * 2));
+            const calculatedDailyDemand = Math.max(
+              1,
+              Math.round(baseDaily * elasticity * itemAdBonus * companyAdBonus * reviewMult * outsiderBonus)
+            );
+
+            const unitsSoldToday = Math.min(item.quantity, calculatedDailyDemand);
+            if (unitsSoldToday > 0) {
+              item.quantity -= unitsSoldToday;
+              dailyComponentRevenue += unitsSoldToday * price;
+              invChanged = true;
+
+              // Update customParts units sold & daily velocity
+              setCustomParts((prevParts) => {
+                const current = prevParts[compId] || {
+                  customName: comp.name,
+                  componentId: compId,
+                  unitsSold: 0,
+                  reputation: 50,
+                  pricePremiumPct: 0,
+                };
+                return {
+                  ...prevParts,
+                  [compId]: {
+                    ...current,
+                    unitsSold: (current.unitsSold || 0) + unitsSoldToday,
+                    recentSalesRate: unitsSoldToday,
+                    reputation: Math.min(100, current.reputation + 0.02),
+                  },
+                };
+              });
+            }
+          }
+        }
+      });
+
+      return invChanged ? updatedInv : prevInv;
+    });
+
+    // 3. Daily Sales & Market Velocity for Turnkey Assembled Computers
+    let dailyPcRevenue = 0;
+    setBlueprints((prevBps) => {
+      let bpChanged = false;
+      const updatedBps = prevBps.map((bp) => {
+        const invCount = bp.inventoryCount ?? (bp.activeProduction ? 25 : 0);
+        if (bp.activeProduction && invCount > 0) {
+          const price = bp.sellingPrice;
+          const cost = bp.totalCost;
+          const markup = price / Math.max(1, cost);
+          let elasticity = 1.0;
+          if (markup <= 1.4) elasticity = 1.35;
+          else if (markup <= 2.2) elasticity = 1.05;
+          else if (markup <= 3.2) elasticity = 0.8;
+          else if (markup <= 4.5) elasticity = 0.45;
+          else elasticity = 0.2;
+
+          const bpAdSpend = bp.adSpend || 0;
+          const adBonus = 1 + (bpAdSpend / 300) * 0.5;
+          const reviewMult = bp.review?.salesMultiplier || 1.0;
+          const baseDemand = Math.max(1, Math.round((bp.appealScore / 35) * (0.8 + Math.random() * 0.4)));
+          const dailyDemand = Math.max(1, Math.round(baseDemand * elasticity * adBonus * reviewMult));
+
+          const soldToday = Math.min(invCount, dailyDemand);
+          if (soldToday > 0) {
+            dailyPcRevenue += soldToday * price;
+            bpChanged = true;
+            return {
+              ...bp,
+              inventoryCount: invCount - soldToday,
+              unitsSold: (bp.unitsSold || 0) + soldToday,
+              recentSalesRate: soldToday,
+            };
+          }
+        }
+        return bp;
+      });
+
+      return bpChanged ? updatedBps : prevBps;
+    });
+
+    // Credit daily cash and accumulate into monthly revenue
+    const totalDailyRevenue = dailyComponentRevenue + dailyPcRevenue;
+    if (totalDailyRevenue > 0) {
+      setCompany((prev) => ({
+        ...prev,
+        cash: prev.cash + totalDailyRevenue,
+      }));
+      setMonthlyRevenue((prev) => prev + totalDailyRevenue);
+    }
   };
 
   // Monthly Cycle handler
@@ -263,77 +410,32 @@ export function App() {
     };
     const rent = rentMap[company.facility] || 300;
     const payroll = employees.reduce((acc, e) => acc + e.salary, 0);
-    const adSpend = company.monthlyAdSpend || 0;
-    const totalExpenses = rent + payroll + adSpend;
+    const companyAdSpend = company.monthlyAdSpend || 0;
 
-    // 2. Sales execution from inventory
-    let totalSalesRev = 0;
-    setInventory((prevInv) => {
-      const updated = { ...prevInv };
+    // Total product-specific ad spend
+    const blueprintAdSpends = blueprints.reduce((acc, b) => acc + (b.adSpend || 0), 0);
+    const componentAdSpends = Object.values(customParts).reduce((acc, p) => acc + (p.adSpend || 0), 0);
+    const totalAdSpend = companyAdSpend + blueprintAdSpends + componentAdSpends;
 
-      Object.keys(updated).forEach((compId) => {
-        const item = updated[compId];
-        if (item.quantity > 0) {
-          const comp = catalogue.find((c) => c.id === compId);
-          if (comp) {
-            // Calculate demand
-            const adBonus = 1 + (adSpend / 10000) * 0.15;
-            const outsiderBonus = company.background === 'bg_outsider' ? 1.15 : 1.0;
-            const monthlySellRate = Math.min(
-              item.quantity,
-              Math.max(10, Math.round(50 * adBonus * outsiderBonus))
-            );
+    const totalExpenses = rent + payroll + totalAdSpend;
 
-            item.quantity -= monthlySellRate;
-            const price = comp.basePrice;
-            totalSalesRev += monthlySellRate * price;
-
-            // Update part reputation & units sold
-            setCustomParts((prevParts) => {
-              const current = prevParts[compId] || {
-                customName: comp.name,
-                componentId: compId,
-                unitsSold: 0,
-                reputation: 50,
-                pricePremiumPct: 0,
-              };
-              const newSold = current.unitsSold + monthlySellRate;
-              const newRep = Math.min(100, current.reputation + 0.2);
-              const pricePremium = Math.round((newRep / 10) * 0.5 * 10) / 10;
-              return {
-                ...prevParts,
-                [compId]: {
-                  ...current,
-                  unitsSold: newSold,
-                  reputation: newRep,
-                  pricePremiumPct: pricePremium,
-                },
-              };
-            });
-          }
-        }
-      });
-
-      return updated;
-    });
-
-    const net = totalSalesRev - totalExpenses;
-    setMonthlyRevenue(totalSalesRev);
-    setMonthlyExpenses(totalExpenses);
-    setMonthlyNetProfit(net);
-
-    // Update Company balance & brand metrics
+    // Deduct overhead from cash balance
     setCompany((prev) => ({
       ...prev,
-      cash: prev.cash + net,
-      brandAwareness: Math.min(100, prev.brandAwareness + (adSpend > 0 ? 0.8 : 0.2)),
-      popularity: Math.min(100, Math.max(10, prev.popularity * 0.95 + (totalSalesRev > 0 ? 2 : 0))),
+      cash: prev.cash - totalExpenses,
+      brandAwareness: Math.min(100, prev.brandAwareness + (totalAdSpend > 0 ? 0.8 : 0.2)),
+      popularity: Math.min(100, Math.max(10, prev.popularity * 0.96 + (monthlyRevenue > 0 ? 1.5 : 0))),
     }));
+
+    setMonthlyExpenses(totalExpenses);
+    setMonthlyNetProfit(monthlyRevenue - totalExpenses);
+    setMonthlyRevenue(0);
 
     // Trigger historical news anchors if date matches
     setNewsQueue((prevQueue) =>
       prevQueue.map((anchor) => {
-        if (!anchor.fired && gameDate.year >= 1952) {
+        const anchorYear = parseInt(anchor.date.split('-')[0], 10);
+        if (!anchor.fired && gameDate.year >= anchorYear) {
           return { ...anchor, fired: true };
         }
         return anchor;
@@ -341,7 +443,7 @@ export function App() {
     );
   };
 
-  // Order production of components
+  // Order production of components & generate review for maiden batch
   const handleOrderProduction = (componentId: string, quantity: number, unitCost: number) => {
     const totalCost = quantity * unitCost;
     if (company.cash < totalCost) return;
@@ -362,6 +464,48 @@ export function App() {
         },
       };
     });
+
+    // If this custom part doesn't have a review yet, generate one and show review modal
+    const comp = catalogue.find((c) => c.id === componentId);
+    const existingPart = customParts[componentId];
+    if (comp && (!existingPart || !existingPart.review)) {
+      const partName = existingPart?.customName || comp.name;
+      const price = existingPart?.sellingPrice || comp.basePrice;
+      const review = generateProductReview({
+        name: partName,
+        type: 'component',
+        tier: comp.tier,
+        totalCost: comp.cost,
+        sellingPrice: price,
+        reliability: comp.reliability,
+        appealScore: 70,
+        currentYear: gameDate.year,
+      });
+
+      setCustomParts((prev) => {
+        const current = prev[componentId] || {
+          customName: partName,
+          componentId,
+          unitsSold: 0,
+          reputation: 50,
+          pricePremiumPct: 0,
+          sellingPrice: price,
+        };
+        return {
+          ...prev,
+          [componentId]: {
+            ...current,
+            review,
+          },
+        };
+      });
+
+      setLaunchReviewTarget({
+        name: partName,
+        type: 'component',
+        review,
+      });
+    }
   };
 
   // Custom Part Naming
@@ -381,11 +525,66 @@ export function App() {
     });
   };
 
-  // Update selling price
+  // Update component selling price
   const handleUpdatePartPrice = (componentId: string, price: number) => {
     setCatalogue((prev) =>
       prev.map((c) => (c.id === componentId ? { ...c, basePrice: price } : c))
     );
+    setCustomParts((prev) => {
+      const existing = prev[componentId] || {
+        customName: catalogue.find((c) => c.id === componentId)?.name || componentId,
+        componentId,
+        unitsSold: 0,
+        reputation: 50,
+        pricePremiumPct: 0,
+      };
+      return {
+        ...prev,
+        [componentId]: { ...existing, sellingPrice: price },
+      };
+    });
+  };
+
+  // Update Product-Specific Ad Spend
+  const handleUpdateProductAdSpend = (
+    itemId: string,
+    itemType: 'pc' | 'component' | 'supercomputer',
+    newAdSpend: number
+  ) => {
+    if (itemType === 'pc' || itemType === 'supercomputer') {
+      setBlueprints((prev) =>
+        prev.map((bp) => (bp.id === itemId ? { ...bp, adSpend: newAdSpend } : bp))
+      );
+    } else {
+      setCustomParts((prev) => {
+        const current = prev[itemId] || {
+          customName: catalogue.find((c) => c.id === itemId)?.name || itemId,
+          componentId: itemId,
+          unitsSold: 0,
+          reputation: 50,
+          pricePremiumPct: 0,
+        };
+        return {
+          ...prev,
+          [itemId]: { ...current, adSpend: newAdSpend },
+        };
+      });
+    }
+  };
+
+  // Update Product-Specific Selling Price
+  const handleUpdateProductPrice = (
+    itemId: string,
+    itemType: 'pc' | 'component' | 'supercomputer',
+    newPrice: number
+  ) => {
+    if (itemType === 'pc' || itemType === 'supercomputer') {
+      setBlueprints((prev) =>
+        prev.map((bp) => (bp.id === itemId ? { ...bp, sellingPrice: newPrice } : bp))
+      );
+    } else {
+      handleUpdatePartPrice(itemId, newPrice);
+    }
   };
 
   // Researcher Assignment
@@ -435,10 +634,38 @@ export function App() {
     handleUnlockTier(nextTier);
   };
 
-  // Save Computer Blueprint
+  // Save Computer Blueprint & Trigger Critic Launch Review
   const handleSaveBlueprint = (bp: Blueprint) => {
-    setBlueprints((prev) => [...prev, bp]);
-    confetti({ particleCount: 30, spread: 50 });
+    const review = generateProductReview({
+      name: bp.name,
+      type: bp.type,
+      tier: bp.tier,
+      totalCost: bp.totalCost,
+      sellingPrice: bp.sellingPrice,
+      reliability: bp.validationErrors && bp.validationErrors.length === 0 ? 0.94 : 0.65,
+      appealScore: bp.appealScore || 75,
+      currentYear: gameDate.year,
+    });
+
+    const finalizedBlueprint: Blueprint = {
+      ...bp,
+      inventoryCount: bp.inventoryCount ?? 30,
+      activeProduction: true,
+      unitsSold: 0,
+      recentSalesRate: 2,
+      adSpend: 0,
+      review,
+    };
+
+    setBlueprints((prev) => [...prev, finalizedBlueprint]);
+    confetti({ particleCount: 50, spread: 70 });
+
+    // Lift press embargo & reveal critic reviews
+    setLaunchReviewTarget({
+      name: bp.name,
+      type: bp.type,
+      review,
+    });
   };
 
   // Bid Contract
@@ -570,6 +797,20 @@ export function App() {
           unlockedTier={celebrationTier}
           facilityName={company.facility}
           onAcknowledge={() => setCelebrationTier(null)}
+        />
+      )}
+
+      {/* Launch Critic Review & Press Embargo Lifted Modal */}
+      {launchReviewTarget && (
+        <LaunchReviewModal
+          productName={launchReviewTarget.name}
+          productType={launchReviewTarget.type}
+          reviewSummary={launchReviewTarget.review}
+          onClose={() => setLaunchReviewTarget(null)}
+          onOpenMarketing={() => {
+            setLaunchReviewTarget(null);
+            setActiveTab('market');
+          }}
         />
       )}
 
@@ -738,7 +979,13 @@ export function App() {
             segments={marketSegments}
             competitors={competitors}
             company={company}
-            onUpdateAdSpend={(spend) => setCompany((prev) => ({ ...prev, monthlyAdSpend: spend }))}
+            blueprints={blueprints}
+            customParts={customParts}
+            catalogue={catalogue}
+            inventory={inventory}
+            onUpdateProductAdSpend={handleUpdateProductAdSpend}
+            onUpdateProductPrice={handleUpdateProductPrice}
+            onUpdateCompanyAdSpend={(spend) => setCompany((prev) => ({ ...prev, monthlyAdSpend: spend }))}
           />
         )}
 

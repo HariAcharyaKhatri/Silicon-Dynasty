@@ -76,7 +76,7 @@ export const BasicCatalogueTab: React.FC<Props> = ({
   const totalCost = selectedComp.cost * orderQty;
   const canAfford = cash >= totalCost;
 
-  // Car Company Tycoon inspired telemetry calculations
+  // Production & Market telemetry calculations
   const estimatedDefects = Math.round(orderQty * 0.05);
   const estimatedGoodUnits = orderQty - estimatedDefects;
   const estimatedBatchRevenue = estimatedGoodUnits * priceInput;
@@ -168,7 +168,7 @@ export const BasicCatalogueTab: React.FC<Props> = ({
         </div>
       </div>
 
-      {/* Production Workbench & Custom Branding (Car Company Tycoon inspired) */}
+      {/* Production Workbench & Custom Branding */}
       <div className="lg:col-span-7 space-y-5">
         {/* Workbench Facility Visual Banner */}
         <div className="rounded-2xl overflow-hidden border border-[#30363d] bg-black/60 relative group shadow-xl">
@@ -275,7 +275,7 @@ export const BasicCatalogueTab: React.FC<Props> = ({
           </div>
         </div>
 
-        {/* Production Order Workstation — Car Company Tycoon Inspired */}
+        {/* Production Order Workstation */}
         <div className="bg-[#161b22] border border-[#30363d] rounded-2xl p-5 space-y-4">
           <div className="flex items-center gap-2.5 pb-3 border-b border-[#30363d]">
             <Package className="w-5 h-5 text-emerald-400" />

@@ -103,7 +103,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
         </div>
       </header>
 
-      {/* Main Menu Hero Layout — Inspired by Car Company Tycoon title menus */}
+      {/* Main Menu Hero Layout — Dynamic Industrial Tycoon Interface */}
       <main className="relative z-20 w-full max-w-6xl mx-auto px-8 my-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center py-6">
         {/* Left Column: Menu Options */}
         <div className="lg:col-span-6 space-y-4">
@@ -202,7 +202,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
                     DEVELOPER & CREDITS
                   </div>
                   <div className="text-[11px] font-mono text-gray-400">
-                    Prompt Engineering, Conceptualization & Car Company Tycoon Foundations
+                    Prompt Engineering, Conceptualization & Simulation Foundations
                   </div>
                 </div>
               </div>
@@ -236,7 +236,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
           </div>
         </div>
 
-        {/* Right Column: Car Company Tycoon Inspired Live Telemetry Card & Era Visuals */}
+        {/* Right Column: Live Enterprise Telemetry Card & Era Visuals */}
         <div className="lg:col-span-6 space-y-4">
           <div className="bg-[#121620]/90 border border-[#30363d] rounded-2xl p-6 shadow-2xl backdrop-blur-md space-y-4">
             
