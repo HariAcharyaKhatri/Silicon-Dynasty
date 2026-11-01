@@ -62,21 +62,21 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({ onLoginSuccess }) => {
   };
 
   return (
-    <div className="relative min-h-screen w-full bg-[#080b0f] flex flex-col justify-between items-center p-6 select-none overflow-hidden font-sans">
+    <div className="relative min-h-screen w-full bg-[#080b0f] flex flex-col justify-between items-center p-3 sm:p-6 select-none overflow-hidden font-sans">
       {/* Background Decorative Tech Grid & Scanline Effect */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#1f293712_1px,transparent_1px),linear-gradient(to_bottom,#1f293712_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
       <div className="absolute inset-0 bg-radial-at-c from-emerald-950/25 via-transparent to-black pointer-events-none" />
       <div className="crt-overlay absolute inset-0 pointer-events-none" />
 
       {/* Top Bar / Build Indicator */}
-      <header className="relative z-10 w-full max-w-5xl flex items-center justify-between py-3 border-b border-[#21262d]/60 text-xs font-mono text-gray-500">
+      <header className="relative z-10 w-full max-w-5xl flex items-center justify-between py-2 sm:py-3 border-b border-[#21262d]/60 text-xs font-mono text-gray-500">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-          <span className="text-gray-400">TELETYPE MAINFRAME TERMINAL v0.4.2</span>
+          <span className="text-gray-400 truncate max-w-[200px] sm:max-w-none">MAINFRAME TERMINAL v0.4.2</span>
         </div>
-        <div className="flex items-center gap-4 text-[11px]">
-          <span>PHASE A/B — 1952 ORIGIN</span>
-          <span className="text-emerald-400/80">AUTHENTICATION GATEWAY</span>
+        <div className="flex items-center gap-3 text-[11px]">
+          <span className="hidden sm:inline">PHASE A/B — 1952 ORIGIN</span>
+          <span className="text-emerald-400/80 font-bold">AUTH GATEWAY</span>
         </div>
       </header>
 

@@ -10,17 +10,17 @@ export const DeveloperModal: React.FC<DeveloperModalProps> = ({ isOpen, onClose 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in duration-200">
-      <div className="w-full max-w-2xl bg-[#12161f] border border-[#30363d] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-4 animate-in fade-in duration-200">
+      <div className="w-full max-w-2xl bg-[#12161f] border border-[#30363d] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
         {/* Header */}
-        <div className="bg-[#0b0e14] px-6 py-4 border-b border-[#30363d] flex items-center justify-between">
+        <div className="bg-[#0b0e14] px-5 sm:px-6 py-4 border-b border-[#30363d] flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
+            <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30 shrink-0">
               <Code2 className="w-4 h-4" />
             </div>
             <div>
               <h2 className="text-base font-bold text-white tracking-wider uppercase font-mono">
-                DEVELOPER & CREDITS
+                DEVELOPER &amp; CREDITS
               </h2>
               <p className="text-xs text-gray-400">Silicon Dynasty: The Evolution of Computing</p>
             </div>
@@ -34,7 +34,7 @@ export const DeveloperModal: React.FC<DeveloperModalProps> = ({ isOpen, onClose 
         </div>
 
         {/* Modal Content */}
-        <div className="p-6 space-y-6 max-h-[75vh] overflow-y-auto">
+        <div className="p-4 sm:p-6 space-y-6 overflow-y-auto flex-1">
           {/* Mandatory Specific Attribution Banner */}
           <div className="bg-emerald-950/40 border-2 border-emerald-500/60 rounded-xl p-5 space-y-2 relative overflow-hidden">
             <div className="absolute top-0 right-0 px-3 py-1 bg-emerald-500/20 border-b border-l border-emerald-500/40 text-[10px] font-mono text-emerald-300 uppercase tracking-widest font-bold">
@@ -128,7 +128,7 @@ export const DeveloperModal: React.FC<DeveloperModalProps> = ({ isOpen, onClose 
         </div>
 
         {/* Footer */}
-        <div className="bg-[#0b0e14] px-6 py-4 border-t border-[#30363d] flex items-center justify-between">
+        <div className="bg-[#0b0e14] px-5 sm:px-6 py-3.5 border-t border-[#30363d] flex items-center justify-between shrink-0">
           <span className="text-[11px] text-gray-500 font-mono">
             All historical milestones researched faithfully.
           </span>

@@ -815,121 +815,133 @@ export function App() {
       )}
 
       {/* Main Top Header Bar with App Logo & Telemetry */}
-      <header className="relative z-20 bg-[#12161f] border-b border-[#30363d] px-6 py-3 flex flex-wrap items-center justify-between gap-4 sticky top-0 backdrop-blur-md">
-        <div className="flex items-center gap-4">
-          {/* Main App Logo in top-left */}
-          <AppLogo size="sm" showText={true} />
+      <header className="relative z-20 bg-[#12161f]/95 border-b border-[#30363d] px-3 sm:px-6 py-2.5 sm:py-3 sticky top-0 backdrop-blur-md shadow-md">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2.5 sm:gap-4">
+          {/* Left: App Logo & Company Identity */}
+          <div className="flex items-center gap-2 sm:gap-3.5">
+            <AppLogo size="sm" showText={true} />
 
-          <div className="h-6 w-px bg-[#30363d] hidden sm:block" />
+            <div className="h-5 w-px bg-[#30363d] hidden sm:block" />
 
-          {/* Company & Facility info */}
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono font-bold text-gray-200 uppercase">{company.name}</span>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/70 text-emerald-400 border border-emerald-500/30 font-bold">
-              {company.currentTier}
-            </span>
-            <span className="text-[11px] font-mono text-gray-400 hidden md:inline">
-              • {company.facility}
-            </span>
-          </div>
-        </div>
-
-        {/* Financial & Time Controls */}
-        <div className="flex items-center gap-4 text-xs font-mono">
-          {/* Treasury */}
-          <div className="bg-[#0b0e14] px-3.5 py-1.5 rounded-xl border border-[#2b3547] flex items-center gap-2 shadow-inner">
-            <DollarSign className="w-4 h-4 text-emerald-400" />
-            <div>
-              <span className="text-[10px] text-gray-500 block uppercase">Cash Treasury</span>
-              <span className="font-bold text-emerald-400 text-sm">
-                ${company.cash.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <span className="text-xs font-mono font-bold text-gray-200 uppercase truncate max-w-[110px] sm:max-w-none">
+                {company.name}
+              </span>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950/70 text-emerald-400 border border-emerald-500/30 font-bold shrink-0">
+                {company.currentTier}
+              </span>
+              <span className="text-[11px] font-mono text-gray-400 hidden lg:inline">
+                • {company.facility}
               </span>
             </div>
           </div>
 
-          {/* Valuation */}
-          <div className="bg-[#0b0e14] px-3.5 py-1.5 rounded-xl border border-[#2b3547] hidden lg:block shadow-inner">
-            <span className="text-[10px] text-gray-500 block uppercase">Valuation</span>
-            <span className="font-bold text-white text-sm">
-              ${valuation.totalValuation.toLocaleString()}
-            </span>
-          </div>
+          {/* Right: Telemetry, Speed & Calendar Controls */}
+          <div className="flex items-center gap-1.5 sm:gap-3 text-xs font-mono">
+            {/* Cash Treasury */}
+            <div className="bg-[#0b0e14] px-2.5 sm:px-3 py-1 rounded-xl border border-[#2b3547] flex items-center gap-1.5 shadow-inner">
+              <DollarSign className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+              <div>
+                <span className="text-[9px] text-gray-500 block uppercase hidden sm:block">Treasury</span>
+                <span className="font-bold text-emerald-400 text-xs sm:text-sm">
+                  ${company.cash >= 1000000
+                    ? `${(company.cash / 1000000).toFixed(2)}M`
+                    : company.cash >= 10000
+                    ? `${(company.cash / 1000).toFixed(1)}k`
+                    : company.cash.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                </span>
+              </div>
+            </div>
 
-          {/* Time & Calendar Controls */}
-          <div className="bg-[#0b0e14] px-3.5 py-1.5 rounded-xl border border-[#2b3547] flex items-center gap-3 shadow-inner">
-            <div>
-              <span className="text-[10px] text-gray-500 block uppercase">Calendar</span>
-              <span className="font-bold text-white text-sm">
-                {gameDate.year}-{String(gameDate.month).padStart(2, '0')}-{String(gameDate.day).padStart(2, '0')}
+            {/* Valuation (Hidden on small mobile) */}
+            <div className="bg-[#0b0e14] px-3 py-1 rounded-xl border border-[#2b3547] hidden md:block shadow-inner">
+              <span className="text-[9px] text-gray-500 block uppercase">Valuation</span>
+              <span className="font-bold text-white text-xs sm:text-sm">
+                ${valuation.totalValuation >= 1000000
+                  ? `${(valuation.totalValuation / 1000000).toFixed(2)}M`
+                  : valuation.totalValuation.toLocaleString()}
               </span>
             </div>
 
-            <div className="flex items-center gap-1 border-l border-[#2b3547] pl-2.5">
-              <button
-                onClick={() => setIsPlaying(!isPlaying)}
-                className="p-1 rounded-lg hover:bg-[#1f2633] text-emerald-400 transition-colors"
-                title={isPlaying ? 'Pause simulation' : 'Resume simulation'}
-              >
-                {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-              </button>
+            {/* Calendar & Simulation Time Controls */}
+            <div className="bg-[#0b0e14] px-2.5 sm:px-3 py-1 rounded-xl border border-[#2b3547] flex items-center gap-2 shadow-inner">
+              <div>
+                <span className="text-[9px] text-gray-500 block uppercase hidden sm:block">Date</span>
+                <span className="font-bold text-white text-[11px] sm:text-xs">
+                  {gameDate.year}-{String(gameDate.month).padStart(2, '0')}-{String(gameDate.day).padStart(2, '0')}
+                </span>
+              </div>
 
-              <button
-                onClick={() => setGameSpeed((prev) => (prev === 1 ? 2 : prev === 2 ? 5 : 1))}
-                className="p-1 rounded-lg hover:bg-[#1f2633] text-gray-300 font-mono text-[11px] font-bold transition-colors"
-                title="Toggle simulation speed"
-              >
-                {gameSpeed}x
-              </button>
+              <div className="flex items-center gap-1 border-l border-[#2b3547] pl-1.5 sm:pl-2">
+                <button
+                  onClick={() => setIsPlaying(!isPlaying)}
+                  className="p-1 rounded-lg hover:bg-[#1f2633] text-emerald-400 transition-colors min-w-[28px] min-h-[28px] flex items-center justify-center"
+                  title={isPlaying ? 'Pause simulation' : 'Resume simulation'}
+                >
+                  {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
+                </button>
+
+                <button
+                  onClick={() => setGameSpeed((prev) => (prev === 1 ? 2 : prev === 2 ? 5 : 1))}
+                  className="px-1.5 py-0.5 rounded-lg hover:bg-[#1f2633] text-gray-300 font-mono text-[10px] sm:text-[11px] font-bold transition-colors"
+                  title="Toggle simulation speed"
+                >
+                  {gameSpeed}x
+                </button>
+              </div>
             </div>
-          </div>
 
-          {/* Return to Main Menu Button */}
-          <button
-            onClick={() => {
-              setIsPlaying(false);
-              setAppScreen('main_menu');
-            }}
-            className="p-2 rounded-xl bg-[#161c28] border border-[#30363d] hover:border-emerald-500/50 text-gray-300 hover:text-white transition-all flex items-center gap-1.5"
-            title="Pause & Return to Main Menu"
-          >
-            <Home className="w-4 h-4 text-emerald-400" />
-            <span className="hidden sm:inline text-xs font-bold font-mono">MENU</span>
-          </button>
+            {/* Menu Button */}
+            <button
+              onClick={() => {
+                setIsPlaying(false);
+                setAppScreen('main_menu');
+              }}
+              className="p-1.5 sm:px-2.5 sm:py-1.5 rounded-xl bg-[#161c28] border border-[#30363d] hover:border-emerald-500/50 text-gray-300 hover:text-white transition-all flex items-center gap-1"
+              title="Pause & Return to Main Menu"
+            >
+              <Home className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="hidden sm:inline text-xs font-bold font-mono">MENU</span>
+            </button>
+          </div>
         </div>
       </header>
 
       {/* Primary Navigation Tabs */}
-      <nav className="relative z-20 bg-[#12161f] border-b border-[#30363d] px-6 flex items-center gap-1 overflow-x-auto select-none font-mono">
-        {[
-          { id: 'catalogue', label: `Workshop Catalogue (${company.currentTier})`, icon: Wrench },
-          { id: 'research', label: 'Research Lab (RP)', icon: Lightbulb },
-          { id: 'design', label: 'Design Studio & CAD', icon: Layers },
-          { id: 'supercomputer', label: 'Supercomputer Arrays', icon: Server },
-          { id: 'market', label: 'Market & Advertising', icon: BarChart3 },
-          { id: 'personnel', label: 'Personnel & Labor', icon: Users },
-          { id: 'finance', label: 'Valuation & Ledger', icon: DollarSign },
-        ].map((tab) => {
-          const Icon = tab.icon;
-          const isActive = activeTab === tab.id;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as TabId)}
-              className={`px-4 py-3 text-xs font-bold uppercase tracking-wider flex items-center gap-2 border-b-2 transition-all whitespace-nowrap ${
-                isActive
-                  ? 'border-emerald-400 text-emerald-400 bg-emerald-950/20'
-                  : 'border-transparent text-gray-400 hover:text-white hover:bg-[#1a2130]'
-              }`}
-            >
-              <Icon className="w-4 h-4" />
-              {tab.label}
-            </button>
-          );
-        })}
+      <nav className="relative z-20 bg-[#12161f] border-b border-[#30363d] px-3 sm:px-6 select-none font-mono">
+        <div className="max-w-7xl mx-auto flex items-center gap-1 overflow-x-auto no-scrollbar py-1 sm:py-0">
+          {[
+            { id: 'catalogue', label: `Workshop (${company.currentTier})`, shortLabel: 'Workshop', icon: Wrench },
+            { id: 'research', label: 'Research Lab (RP)', shortLabel: 'Research', icon: Lightbulb },
+            { id: 'design', label: 'Design Studio & CAD', shortLabel: 'Design', icon: Layers },
+            { id: 'supercomputer', label: 'Supercomputer Arrays', shortLabel: 'Supercluster', icon: Server },
+            { id: 'market', label: 'Market & Ads', shortLabel: 'Market', icon: BarChart3 },
+            { id: 'personnel', label: 'Staff & Labor', shortLabel: 'Staff', icon: Users },
+            { id: 'finance', label: 'Valuation & Ledger', shortLabel: 'Ledger', icon: DollarSign },
+          ].map((tab) => {
+            const Icon = tab.icon;
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as TabId)}
+                className={`px-3 sm:px-4 py-2 sm:py-3 text-xs font-bold uppercase tracking-wider flex items-center gap-1.5 sm:gap-2 border-b-2 transition-all whitespace-nowrap rounded-t-lg sm:rounded-t-none ${
+                  isActive
+                    ? 'border-emerald-400 text-emerald-400 bg-emerald-950/20'
+                    : 'border-transparent text-gray-400 hover:text-white hover:bg-[#1a2130]'
+                }`}
+              >
+                <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                <span className="hidden sm:inline">{tab.label}</span>
+                <span className="sm:hidden">{tab.shortLabel}</span>
+              </button>
+            );
+          })}
+        </div>
       </nav>
 
       {/* Main Workspace Body */}
-      <main className="relative z-10 flex-1 p-6 max-w-7xl mx-auto w-full">
+      <main className="relative z-10 flex-1 p-3 sm:p-5 lg:p-6 max-w-7xl mx-auto w-full">
         {activeTab === 'catalogue' && (
           <BasicCatalogueTab
             catalogue={catalogue}

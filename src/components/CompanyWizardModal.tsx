@@ -39,14 +39,14 @@ export const CompanyWizardModal: React.FC<Props> = ({ onComplete }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4">
-      <div className="w-full max-w-2xl bg-[#161b22] border border-[#30363d] rounded-xl shadow-2xl overflow-hidden flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-4 animate-in fade-in duration-200 select-none">
+      <div className="w-full max-w-2xl bg-[#161b22] border border-[#30363d] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
         {/* Header */}
-        <div className="bg-[#0d1117] px-6 py-4 border-b border-[#30363d] flex items-center justify-between">
+        <div className="bg-[#0d1117] px-5 sm:px-6 py-4 border-b border-[#30363d] flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
-            <Cpu className="text-emerald-400 w-6 h-6 animate-pulse" />
+            <Cpu className="text-emerald-400 w-6 h-6 animate-pulse shrink-0" />
             <div>
-              <h2 className="text-lg font-bold text-white tracking-wide">FOUNDING PROTOCOL — 1952</h2>
+              <h2 className="text-base sm:text-lg font-bold text-white tracking-wide">FOUNDING PROTOCOL — 1952</h2>
               <p className="text-xs text-gray-400">Silicon Dynasty: The Evolution of Computing</p>
             </div>
           </div>
@@ -56,7 +56,7 @@ export const CompanyWizardModal: React.FC<Props> = ({ onComplete }) => {
         </div>
 
         {/* Step Content */}
-        <div className="p-6 flex-1 space-y-6">
+        <div className="p-4 sm:p-6 flex-1 space-y-6 overflow-y-auto">
           {step === 1 && (
             <div className="space-y-4">
               {/* Garage Workshop Visual Image */}
@@ -262,7 +262,7 @@ export const CompanyWizardModal: React.FC<Props> = ({ onComplete }) => {
         </div>
 
         {/* Footer */}
-        <div className="bg-[#0d1117] px-6 py-4 border-t border-[#30363d] flex items-center justify-between">
+        <div className="bg-[#0d1117] px-4 sm:px-6 py-3.5 border-t border-[#30363d] flex items-center justify-between shrink-0">
           {step > 1 ? (
             <button
               onClick={() => setStep(step - 1)}

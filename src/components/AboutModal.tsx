@@ -49,19 +49,19 @@ export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in duration-200">
-      <div className="w-full max-w-2xl bg-[#12161f] border border-[#30363d] rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-3 sm:p-4 animate-in fade-in duration-200">
+      <div className="w-full max-w-2xl bg-[#12161f] border border-[#30363d] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
         {/* Header */}
-        <div className="bg-[#0b0e14] px-6 py-4 border-b border-[#30363d] flex items-center justify-between">
+        <div className="bg-[#0b0e14] px-5 sm:px-6 py-4 border-b border-[#30363d] flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30">
+            <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30 shrink-0">
               <User className="w-4 h-4" />
             </div>
             <div>
               <h2 className="text-base font-bold text-white tracking-wider uppercase font-mono">
                 ABOUT THE CREATOR
               </h2>
-              <p className="text-xs text-gray-400">Hari Khatri • Vision & Conceptualization</p>
+              <p className="text-xs text-gray-400">Hari Khatri • Vision &amp; Conceptualization</p>
             </div>
           </div>
           <button
@@ -73,7 +73,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Modal Content */}
-        <div className="p-6 space-y-6 max-h-[75vh] overflow-y-auto">
+        <div className="p-4 sm:p-6 space-y-6 overflow-y-auto flex-1">
           {/* Creator Profile Spotlight */}
           <div className="bg-gradient-to-r from-emerald-950/40 via-[#161c28] to-[#12161f] border border-emerald-500/30 rounded-xl p-5 flex flex-col sm:flex-row items-center gap-5">
             <div className="relative">
@@ -151,7 +151,7 @@ export const AboutModal: React.FC<AboutModalProps> = ({ isOpen, onClose }) => {
         </div>
 
         {/* Footer */}
-        <div className="bg-[#0b0e14] px-6 py-4 border-t border-[#30363d] flex items-center justify-between">
+        <div className="bg-[#0b0e14] px-5 sm:px-6 py-3.5 border-t border-[#30363d] flex items-center justify-between shrink-0">
           <span className="text-[11px] text-gray-500 font-mono">
             Edition 4 Consolidated Architecture
           </span>

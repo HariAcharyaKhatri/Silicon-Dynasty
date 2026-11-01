@@ -75,20 +75,20 @@ export const TierUnlockModal: React.FC<TierUnlockModalProps> = ({
   const details = tierDescriptions[unlockedTier] || tierDescriptions['T1'];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 animate-in zoom-in-95 duration-200 select-none">
-      <div className="w-full max-w-lg bg-[#12161f] border-2 border-emerald-500 rounded-2xl shadow-2xl shadow-emerald-950/60 overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-3 sm:p-4 animate-in zoom-in-95 duration-200 select-none">
+      <div className="w-full max-w-lg bg-[#12161f] border-2 border-emerald-500 rounded-2xl shadow-2xl shadow-emerald-950/60 overflow-hidden flex flex-col max-h-[92vh]">
         {/* Banner */}
-        <div className="bg-gradient-to-r from-emerald-900/80 via-emerald-800/40 to-[#12161f] p-6 border-b border-emerald-500/40 flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-emerald-400 text-black flex items-center justify-center shadow-lg shadow-emerald-400/30 shrink-0">
-            <Sparkles className="w-8 h-8 animate-pulse" />
+        <div className="bg-gradient-to-r from-emerald-900/80 via-emerald-800/40 to-[#12161f] p-4 sm:p-6 border-b border-emerald-500/40 flex items-center gap-3 sm:gap-4 shrink-0">
+          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-emerald-400 text-black flex items-center justify-center shadow-lg shadow-emerald-400/30 shrink-0">
+            <Sparkles className="w-7 h-7 sm:w-8 sm:h-8 animate-pulse" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-black/40 text-emerald-300 font-extrabold tracking-widest border border-emerald-400/40">
+              <span className="text-[9px] sm:text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-black/40 text-emerald-300 font-extrabold tracking-widest border border-emerald-400/40">
                 TIER FOG OF WAR CLEARED
               </span>
             </div>
-            <h3 className="text-xl font-black text-white font-mono tracking-tight uppercase mt-1">
+            <h3 className="text-lg sm:text-xl font-black text-white font-mono tracking-tight uppercase mt-0.5">
               {details.title}
             </h3>
             <p className="text-xs text-emerald-300 font-mono">
@@ -98,7 +98,7 @@ export const TierUnlockModal: React.FC<TierUnlockModalProps> = ({
         </div>
 
         {/* Content */}
-        <div className="p-6 space-y-4">
+        <div className="p-4 sm:p-6 space-y-4 overflow-y-auto flex-1">
           {/* Tier Architecture Preview Image */}
           <div className="rounded-xl overflow-hidden border border-[#30363d] bg-black/60 relative">
             <img 
@@ -150,7 +150,7 @@ export const TierUnlockModal: React.FC<TierUnlockModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="bg-[#0b0e14] px-6 py-4 border-t border-[#30363d] flex justify-end">
+        <div className="bg-[#0b0e14] px-5 sm:px-6 py-3.5 sm:py-4 border-t border-[#30363d] flex justify-end shrink-0">
           <button
             onClick={onAcknowledge}
             className="px-6 py-2.5 text-xs font-bold bg-emerald-400 text-black hover:bg-emerald-300 rounded-xl transition-all shadow-lg shadow-emerald-500/20 flex items-center gap-2 font-mono uppercase"

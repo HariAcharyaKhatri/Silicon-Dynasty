@@ -53,27 +53,27 @@ export const MainMenu: React.FC<MainMenuProps> = ({
       {isCrtEnabled && <div className="crt-overlay absolute inset-0 pointer-events-none z-30" />}
 
       {/* Top Header Navigation */}
-      <header className="relative z-20 w-full px-8 py-5 flex items-center justify-between border-b border-[#21262d]/60 bg-[#0c1017]/80 backdrop-blur-md">
-        <AppLogo size="md" showText={true} />
+      <header className="relative z-20 w-full px-4 sm:px-8 py-3.5 sm:py-5 flex items-center justify-between border-b border-[#21262d]/60 bg-[#0c1017]/80 backdrop-blur-md">
+        <AppLogo size="sm" showText={true} />
 
-        <div className="flex items-center gap-4 text-xs font-mono">
+        <div className="flex items-center gap-2 sm:gap-3 text-xs font-mono">
           {/* User Profile Badge */}
-          <div className="flex items-center gap-2.5 bg-[#161c28] border border-[#30363d] px-3.5 py-1.5 rounded-full shadow-inner">
+          <div className="flex items-center gap-2 bg-[#161c28] border border-[#30363d] px-2.5 sm:px-3.5 py-1.5 rounded-full shadow-inner">
             <img
               src={user.avatar}
               alt={user.name}
               className="w-5 h-5 rounded-full object-cover border border-emerald-500/40"
             />
-            <span className="text-gray-200 font-medium">{user.name}</span>
+            <span className="text-gray-200 font-medium hidden sm:inline">{user.name}</span>
             <span className="text-[10px] uppercase font-bold text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/30">
-              {user.isGuest ? 'GUEST' : 'GOOGLE AUTH'}
+              {user.isGuest ? 'GUEST' : 'GOOGLE'}
             </span>
           </div>
 
           {/* CRT Filter Quick Toggle */}
           <button
             onClick={onToggleCrt}
-            className={`p-2 rounded-lg border transition-all ${
+            className={`p-2 rounded-xl border transition-all min-w-[36px] min-h-[36px] flex items-center justify-center ${
               isCrtEnabled
                 ? 'bg-emerald-950/60 border-emerald-500 text-emerald-400'
                 : 'bg-[#161c28] border-[#30363d] text-gray-400 hover:text-white'
@@ -86,7 +86,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
           {/* Sound Toggle */}
           <button
             onClick={() => setIsAudioMuted(!isAudioMuted)}
-            className="p-2 rounded-lg bg-[#161c28] border border-[#30363d] text-gray-400 hover:text-white transition-all"
+            className="p-2 rounded-xl bg-[#161c28] border border-[#30363d] text-gray-400 hover:text-white transition-all min-w-[36px] min-h-[36px] flex items-center justify-center"
             title={isAudioMuted ? 'Unmute Audio' : 'Mute Audio'}
           >
             {isAudioMuted ? <VolumeX className="w-4 h-4 text-rose-400" /> : <Volume2 className="w-4 h-4 text-emerald-400" />}
@@ -95,7 +95,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
           {/* Logout / Switch */}
           <button
             onClick={onLogout}
-            className="p-2 rounded-lg bg-[#161c28] border border-[#30363d] text-gray-400 hover:text-rose-400 transition-all"
+            className="p-2 rounded-xl bg-[#161c28] border border-[#30363d] text-gray-400 hover:text-rose-400 transition-all min-w-[36px] min-h-[36px] flex items-center justify-center"
             title="Exit to Authentication Gate"
           >
             <LogOut className="w-4 h-4" />
@@ -104,7 +104,7 @@ export const MainMenu: React.FC<MainMenuProps> = ({
       </header>
 
       {/* Main Menu Hero Layout — Dynamic Industrial Tycoon Interface */}
-      <main className="relative z-20 w-full max-w-6xl mx-auto px-8 my-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center py-6">
+      <main className="relative z-20 w-full max-w-6xl mx-auto px-4 sm:px-8 my-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center py-6">
         {/* Left Column: Menu Options */}
         <div className="lg:col-span-6 space-y-4">
           <div className="space-y-1">
